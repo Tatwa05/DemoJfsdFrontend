@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Edit Student</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <!-- Sidebar Container -->
+    <div class="sidebar-container">
+        <!-- Menu Icon (Hamburger) -->
+        <div class="menu-icon">
+            <i class="fas fa-bars" onclick="toggleSidebar()"></i>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-header"><br><br>
+                <h2>Hello Admin</h2>
+            </div>
+            <ul>
+                <li><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-btn" onclick="toggleDropdown('students')">
+                        <i class="fas fa-users"></i> Manage Students
+                        <span class="arrow">&#9662;</span>
+                    </a>
+                    <ul class="dropdown-content" id="students-dropdown">
+                        <li><a href="view_students.html"><i class="fas fa-eye"></i> View Students</a></li>
+                        <li><a href="edit-student.html"><i class="fas fa-user-edit"></i> Edit Student</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-btn" onclick="toggleDropdown('employers')">
+                        <i class="fas fa-building"></i> Manage Employers
+                        <span class="arrow">&#9662;</span>
+                    </a>
+                    <ul class="dropdown-content" id="employers-dropdown">
+                        <li><a href="View_employees.html"><i class="fas fa-eye"></i> View Employers</a></li>
+                        <li><a href="edit-employer.html"><i class="fas fa-user-edit"></i> Edit Employer</a></li>
+                    </ul>
+                </li>
+                <li><a href="job-postings.html"><i class="fas fa-briefcase"></i> Job Postings</a></li>
+                <li><a href="reports.html"><i class="fas fa-chart-line"></i> Reports</a></li>
+                <li><a href="settings.html"><i class="fas fa-cogs"></i> Settings</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content" id="mainContent">
+        <header>
+            <h1>Edit Student</h1>
+            <div class="user-info">
+                <span>Haneesh</span>
+                <button class="logout-btn" onclick="logout()">Logout</button>
+            </div>
+        </header>
+
+        <!-- Edit Student Form Section -->
+        <section class="edit-student-section">
+            <h2>Edit Student Details</h2>
+            <form class="edit-student-form">
+                <div class="form-group">
+                    <label for="student-name">Student Name</label>
+                    <input type="text" id="student-name" placeholder="Enter student name" required>
+                </div>
+                <div class="form-group">
+                    <label for="student-id">Student ID</label>
+                    <input type="text" id="student-id" placeholder="Enter student ID" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" placeholder="Enter email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone</label>
+                    <input type="tel" id="phone" placeholder="Enter phone number" required>
+                </div>
+                <div class="form-group">
+                    <label for="course">Course</label>
+                    <input type="text" id="course" placeholder="Enter course" required>
+                </div>
+                <button type="submit" class="submit-btn">Save Changes</button>
+            </form>
+        </section>
+    </div>
+
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('active');
+        }
+
+        function toggleDropdown(type) {
+            const dropdownContent = document.getElementById(`${type}-dropdown`);
+            const arrow = dropdownContent.previousElementSibling.querySelector('.arrow');
+            dropdownContent.classList.toggle('show');
+
+            // Rotate arrow when dropdown is toggled
+            if (dropdownContent.classList.contains('show')) {
+                arrow.style.transform = "rotate(180deg)";
+            } else {
+                arrow.style.transform = "rotate(0deg)";
+            }
+        }
+
+        // Close sidebar when clicking outside of it
+        document.addEventListener('click', function(event) {
+            const sidebar = document.getElementById('sidebar');
+            const menuIcon = document.querySelector('.menu-icon');
+            if (!sidebar.contains(event.target) && !menuIcon.contains(event.target) && sidebar.classList.contains('active')) {
+                sidebar.classList.remove('active');
+            }
+        });
+
+        function logout() {
+            window.location.href = "login.html"; // Redirect to the login page
+        }
+    </script>
+
+    <style>
+        /* Section Styling */
+        .edit-student-section {
+            background-color: #ffffff;
+            padding: 40px;
+            margin: 20px auto;
+            border-radius: 10px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+        }
+
+        .edit-student-section h2 {
+            font-size: 28px;
+            color: #2f335a;
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        /* Form Styling */
+        .edit-student-form {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .form-group input {
+            padding: 14px;
+            font-size: 15px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            transition: border-color 0.3s, background-color 0.3s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #2f335a;
+            background-color: #fff;
+        }
+
+        /* Submit Button Styling */
+        .submit-btn {
+            background-color: #2f335a;
+            color: white;
+            border: none;
+            padding: 14px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: background-color 0.3s;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .submit-btn:hover {
+            background-color: #022fb7;
+        }
+    </style>
+</body>
+</html>

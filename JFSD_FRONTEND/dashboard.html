@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <!-- Sidebar Container -->
+    <div class="sidebar-container">
+        <!-- Menu Icon (Hamburger) -->
+        <div class="menu-icon">
+            <i class="fas fa-bars" onclick="toggleSidebar()"></i>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-header"><br><br>
+                <h2>Hello Admin</h2>
+            </div>
+            <ul>
+                <li><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li> <!-- Link to Dashboard page -->
+                <li class="dropdown">
+                    <a href="#" class="dropdown-btn" onclick="toggleDropdown('students')">
+                        <i class="fas fa-users"></i> Manage Students
+                        <span class="arrow">&#9662;</span>
+                    </a>
+                    <ul class="dropdown-content" id="students-dropdown">
+                        <li><a href="view_students.html"><i class="fas fa-eye"></i> View Students</a></li> <!-- Link to View Students page -->
+                        <li><a href="edit-student.html"><i class="fas fa-user-edit"></i> Edit Student</a></li> <!-- Link to Edit Student page -->
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-btn" onclick="toggleDropdown('employers')">
+                        <i class="fas fa-building"></i> Manage Employers
+                        <span class="arrow">&#9662;</span>
+                    </a>
+                    <ul class="dropdown-content" id="employers-dropdown">
+                        <li><a href="view_employees.html"><i class="fas fa-eye"></i> View Employers</a></li> <!-- Link to View Employers page -->
+                        <li><a href="edit-employer.html"><i class="fas fa-user-edit"></i> Edit Employer</a></li> <!-- Link to Edit Employer page -->
+                    </ul>
+                </li>
+                <li><a href="job-postings.html"><i class="fas fa-briefcase"></i> Job Postings</a></li> <!-- Link to Job Postings page -->
+                <li><a href="reports.html"><i class="fas fa-chart-line"></i> Reports</a></li> <!-- Link to Reports page -->
+                <li><a href="settings.html"><i class="fas fa-cogs"></i> Settings</a></li> <!-- Link to Settings page -->
+            </ul>
+        </div>
+    </div>
+
+    <div class="main-content" id="mainContent">
+        <header>
+            <h1>Dashboard</h1>
+            <div class="user-info">
+                <span>Haneesh</span>
+                <button class="logout-btn" onclick="logout()">Logout</button>
+            </div>
+        </header>
+        
+        <section class="dashboard-cards">
+            <div class="card">
+                <h3>Total Students</h3>
+                <p>200</p>
+            </div>
+            <div class="card">
+                <h3>Total Employers</h3>
+                <p>50</p>
+            </div>
+            <div class="card">
+                <h3>Job Postings</h3>
+                <p>30</p>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('active');
+        }
+
+        function toggleDropdown(type) {
+            const dropdownContent = document.getElementById(`${type}-dropdown`);
+            const arrow = dropdownContent.previousElementSibling.querySelector('.arrow');
+            dropdownContent.classList.toggle('show');
+
+            // Rotate arrow when dropdown is toggled
+            if (dropdownContent.classList.contains('show')) {
+                arrow.style.transform = "rotate(180deg)";
+            } else {
+                arrow.style.transform = "rotate(0deg)";
+            }
+        }
+
+        // Close sidebar when clicking outside of it
+        document.addEventListener('click', function(event) {
+            const sidebar = document.getElementById('sidebar');
+            const menuIcon = document.querySelector('.menu-icon');
+            if (!sidebar.contains(event.target) && !menuIcon.contains(event.target) && sidebar.classList.contains('active')) {
+                sidebar.classList.remove('active');
+            }
+        });
+
+        function logout() {
+            window.location.href = "login.html"; // Redirect to the login page
+        }
+    </script>
+</body>
+</html>

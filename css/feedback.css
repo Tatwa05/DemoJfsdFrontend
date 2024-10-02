@@ -1,0 +1,64 @@
+body {
+    background-image: url('../images/HomePage.jpg');
+    margin-top: 999px;
+    background-size: 100% auto; /* Adjusts the width to 100% of the screen, height auto */
+    background-attachment: fixed;
+    background-position: center top; /* Keeps the image centered at the top */
+    background-repeat: no-repeat; /* Prevents repeating of the image */
+  }
+  
+  .feedback-container {
+    max-width: 600px;
+    margin: 50px auto;
+    background-color: #fff;
+    padding: 30px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+  }
+  
+  .feedback-container h1 {
+    text-align: center;
+    color: #1d07a9;
+    margin-bottom: 20px;
+  }
+  
+  .feedback-container p {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
+  }
+  
+  .feedback-container form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .feedback-container form label {
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  .feedback-container form input,
+  .feedback-container form textarea {
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+  }
+  
+  .feedback-container form button {
+    background-color: #1d07a9;
+    color: white;
+    border: none;
+    padding: 10px;
+    font-size: 18px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .feedback-container form button:hover {
+    background-color: #140680;
+  }
+  

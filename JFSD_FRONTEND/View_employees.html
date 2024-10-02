@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Employers</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* Global Styles */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        /* Header styling */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 28px;
+            color: #2f335a;
+            margin: 0;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+        }
+
+        .user-info span {
+            margin-right: 20px;
+            font-weight: bold;
+        }
+
+        .logout-btn {
+            background-color: #2f335a;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .logout-btn:hover {
+            background-color: #2f335a;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 40px;
+            background-color: #f9f9f9;
+            min-height: calc(100vh - 60px); /* Adjust for header height */
+        }
+
+        /* Dashboard Cards Section */
+        .dashboard-cards {
+            margin-top: 30px;
+        }
+
+        /* Table for employer data */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden; /* Ensures rounded corners work */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        table thead {
+            background-color: #2f335a;
+            color: white;
+        }
+
+        table th, table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        table th {
+            font-weight: 600;
+        }
+
+        table tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* Button styling */
+        .btn {
+            display: inline-block;
+            padding: 8px 16px;
+            color: white;
+            background-color: #2f335a;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-align: center;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #2f335a;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            header h1 {
+                margin-bottom: 10px;
+            }
+
+            .user-info {
+                justify-content: flex-end;
+                width: 100%;
+                margin-top: 10px;
+            }
+
+            .logout-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar Container -->
+    <div class="sidebar-container">
+        <!-- Menu Icon (Hamburger) -->
+        <div class="menu-icon">
+            <i class="fas fa-bars" onclick="toggleSidebar()"></i>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-header"><br><br>
+                <h2>Hello Admin</h2>
+            </div>
+            <ul>
+                <li><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-btn" onclick="toggleDropdown('students')">
+                        <i class="fas fa-users"></i> Manage Students
+                        <span class="arrow">&#9662;</span>
+                    </a>
+                    <ul class="dropdown-content" id="students-dropdown">
+                        <li><a href="view_students.html"><i class="fas fa-eye"></i> View Students</a></li>
+                        <li><a href="edit-student.html"><i class="fas fa-user-edit"></i> Edit Student</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-btn" onclick="toggleDropdown('employers')">
+                        <i class="fas fa-building"></i> Manage Employers
+                        <span class="arrow">&#9662;</span>
+                    </a>
+                    <ul class="dropdown-content" id="employers-dropdown">
+                        <li><a href="view_employers.html"><i class="fas fa-eye"></i> View Employers</a></li>
+                        <li><a href="edit-employer.html"><i class="fas fa-user-edit"></i> Edit Employer</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-btn" onclick="toggleDropdown('job-postings')">
+                        <i class="fas fa-briefcase"></i> Job Postings
+                        <span class="arrow">&#9662;</span>
+                    </a>
+                    <ul class="dropdown-content" id="job-postings-dropdown">
+                        <li><a href="job-postings.html" class="active"><i class="fas fa-list"></i> View Job Postings</a></li>
+                        <li><a href="add-job-posting.html"><i class="fas fa-plus"></i> Add Job Posting</a></li>
+                    </ul>
+                </li>
+                <li><a href="reports.html"><i class="fas fa-chart-line"></i> Reports</a></li>
+                <li><a href="settings.html"><i class="fas fa-cogs"></i> Settings</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content" id="mainContent">
+        <header>
+            <h1>Employers</h1>
+            <div class="user-info">
+                <span>Haneesh</span>
+                <button class="logout-btn" onclick="logout()">Logout</button>
+            </div>
+        </header>
+
+        <!-- Table of Employers -->
+        <section class="dashboard-cards">
+            <h2>Employer List</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Company Name</th>
+                        <th>Contact Person</th>
+                        <th>Email</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Company 1</td>
+                        <td>John Doe</td>
+                        <td>john.doe@example.com</td>
+                        <td>
+                            <button class="btn" onclick="editEmployer('1')">Edit</button>
+                            <button class="btn" onclick="deleteEmployer('1')">Delete</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Company 2</td>
+                        <td>Jane Smith</td>
+                        <td>jane.smith@example.com</td>
+                        <td>
+                            <button class="btn" onclick="editEmployer('2')">Edit</button>
+                            <button class="btn" onclick="deleteEmployer('2')">Delete</button>
+                        </td>
+                    </tr>
+                    <!-- More employer rows as needed -->
+                </tbody>
+            </table>
+        </section>
+    </div>
+
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('active');
+        }
+
+        function toggleDropdown(type) {
+            const dropdownContent = document.getElementById(`${type}-dropdown`);
+            const arrow = dropdownContent.previousElementSibling.querySelector('.arrow');
+            dropdownContent.classList.toggle('show');
+
+            if (dropdownContent.classList.contains('show')) {
+                arrow.style.transform = "rotate(180deg)";
+            } else {
+                arrow.style.transform = "rotate(0deg)";
+            }
+        }
+
+        document.addEventListener('click', function(event) {
+            const sidebar = document.getElementById('sidebar');
+            const menuIcon = document.querySelector('.menu-icon');
+            if (!sidebar.contains(event.target) && !menuIcon.contains(event.target) && sidebar.classList.contains('active')) {
+                sidebar.classList.remove('active');
+            }
+        });
+
+        function logout() {
+            window.location.href = "login.html";
+        }
+
+        function editEmployer(employerId) {
+            // Redirect to edit-employer.html with employerId as a query parameter
+            window.location.href = `edit-employer.html?employerId=${employerId}`;
+        }
+
+        function deleteEmployer(employerId) {
+            // Add your delete logic here
+            alert(`Employer with ID ${employerId} deleted!`);
+            // You can also refresh the page or update the employer list dynamically after deletion
+        }
+    </script>
+</body>
+</html>

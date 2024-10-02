@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Employer</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* Global Styles */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+        body {
+            font-family: 'poppins', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        /* Header styling */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 28px;
+            color: #0112AC;
+            margin: 0;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+        }
+
+        .user-info span {
+            margin-right: 20px;
+            font-weight: bold;
+        }
+
+        .logout-btn {
+            background-color: #0112AC;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .logout-btn:hover {
+            background-color: #000A75;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 40px;
+            background-color: #f9f9f9;
+            min-height: calc(100vh - 60px); /* Adjust for header height */
+        }
+
+        /* Form Section */
+        .form-section {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-section h2 {
+            margin-top: 0;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .form-group input:focus {
+            border-color: #0112AC;
+            outline: none;
+        }
+
+        /* Button styling */
+        .submit-btn {
+            padding: 10px 20px;
+            color: white;
+            background-color: #0112AC;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .submit-btn:hover {
+            background-color: #000A75;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            header h1 {
+                margin-bottom: 10px;
+            }
+
+            .user-info {
+                justify-content: flex-end;
+                width: 100%;
+                margin-top: 10px;
+            }
+
+            .logout-btn {
+                background-color: #c0392b;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar Container -->
+    <div class="sidebar-container">
+        <!-- Menu Icon (Hamburger) -->
+        <div class="menu-icon">
+            <i class="fas fa-bars" onclick="toggleSidebar()"></i>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-header"><br><br>
+                <h2>Hello Admin</h2>
+            </div>
+            <ul>
+                <li><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-btn" onclick="toggleDropdown('students')">
+                        <i class="fas fa-users"></i> Manage Students
+                        <span class="arrow">&#9662;</span>
+                    </a>
+                    <ul class="dropdown-content" id="students-dropdown">
+                        <li><a href="view_students.html"><i class="fas fa-eye"></i> View Students</a></li>
+                        <li><a href="edit-student.html"><i class="fas fa-user-edit"></i> Edit Student</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-btn" onclick="toggleDropdown('employers')">
+                        <i class="fas fa-building"></i> Manage Employers
+                        <span class="arrow">&#9662;</span>
+                    </a>
+                    <ul class="dropdown-content" id="employers-dropdown">
+                        <li><a href="view_employees.html"><i class="fas fa-eye"></i> View Employers</a></li>
+                        <li><a href="edit-employer.html"><i class="fas fa-user-edit"></i> Edit Employer</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-btn" onclick="toggleDropdown('job-postings')">
+                        <i class="fas fa-briefcase"></i> Job Postings
+                        <span class="arrow">&#9662;</span>
+                    </a>
+                    <ul class="dropdown-content" id="job-postings-dropdown">
+                        <li><a href="job-postings.html" class="active"><i class="fas fa-list"></i> View Job Postings</a></li>
+                        <li><a href="add-job-posting.html"><i class="fas fa-plus"></i> Add Job Posting</a></li>
+                    </ul>
+                </li>
+                <li><a href="reports.html"><i class="fas fa-chart-line"></i> Reports</a></li>
+                <li><a href="settings.html"><i class="fas fa-cogs"></i> Settings</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content" id="mainContent">
+        <header>
+            <h1>Edit Employer</h1>
+            <div class="user-info">
+                <span>Haneesh</span>
+                <button class="logout-btn" onclick="logout()">Logout</button>
+            </div>
+        </header>
+
+        <!-- Form Section -->
+        <section class="form-section">
+            <h2>Employer Details</h2><br><br>
+            <form>
+                <div class="form-group">
+                    <label for="companyName">Company Name</label>
+                    <input type="text" id="companyName" name="companyName" required>
+                </div>
+                <div class="form-group">
+                    <label for="contactPerson">Contact Person</label>
+                    <input type="text" id="contactPerson" name="contactPerson" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="text" id="phone" name="phone" required>
+                </div>
+                <button type="submit" class="submit-btn">Submit</button>
+            </form>
+        </section>
+    </div>
+
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('active');
+        }
+
+        function toggleDropdown(type) {
+            const dropdownContent = document.getElementById(`${type}-dropdown`);
+            const arrow = dropdownContent.previousElementSibling.querySelector('.arrow');
+            dropdownContent.classList.toggle('show');
+
+            if (dropdownContent.classList.contains('show')) {
+                arrow.style.transform = "rotate(180deg)";
+            } else {
+                arrow.style.transform = "rotate(0deg)";
+            }
+        }
+
+        document.addEventListener('click', function(event) {
+            const sidebar = document.getElementById('sidebar');
+            const menuIcon = document.querySelector('.menu-icon');
+            if (!sidebar.contains(event.target) && !menuIcon.contains(event.target) && sidebar.classList.contains('active')) {
+                sidebar.classList.remove('active');
+            }
+        });
+
+        function logout() {
+            window.location.href = "login.html";
+        }
+    </script>
+</body>
+</html>
